@@ -23,13 +23,12 @@ public class TankGame {
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
-                System.out.println((char) e.getKeyCode());
+                gameClient.keyPressed(e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                super.keyReleased(e);
+                gameClient.keyReleased(e);
             }
         });
     }

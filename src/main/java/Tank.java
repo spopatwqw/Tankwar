@@ -6,6 +6,7 @@ public class Tank {
 
     private int x;
     private int y;
+    private int speed;
 
     private Direction direction;
 
@@ -14,6 +15,7 @@ public class Tank {
         this.x = x;
         this.y = y;
         this.direction = direction;
+        speed=5;
     }
 
     public Direction getDirection() {
@@ -41,7 +43,6 @@ public class Tank {
     }
 
 
-
     public Image getImage(){
         if(direction==Direction.UP)
             return new ImageIcon("assets/images/itankU.png").getImage();
@@ -53,6 +54,13 @@ public class Tank {
             return new ImageIcon("assets/images/itankR.png").getImage();
 
         return null;
+
+
     }
+
+    public int getSpeed() {
+        return speed;
+    }
+
 
 }
