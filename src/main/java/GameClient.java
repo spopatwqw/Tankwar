@@ -6,6 +6,9 @@ public class GameClient extends JComponent {
     private int screenWidth;
     private int screenHeight;
 
+    //玩家坦克
+    private Tank playerTank;
+
     //預設遊戲畫面
     GameClient(){
         this.setPreferredSize(new Dimension(800,600));
@@ -15,12 +18,18 @@ public class GameClient extends JComponent {
         this.screenWidth=screenWidth;
         this.screenHeight=screenHeight;
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
+
+        init();
+    }
+
+    public void init(){
+        playerTank = new Tank(400, 100, Direction.UP);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        g.drawImage(new ImageIcon("assets/images/itankD.png").getImage(),
-                400,100,null);
+        g.drawImage(playerTank.getImage(),
+                playerTank.getX(),playerTank.getY(),null);
     }
 }
 
