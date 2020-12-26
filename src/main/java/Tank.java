@@ -1,27 +1,27 @@
 
+import object.GameObject;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class Tank {
+public class Tank extends GameObject {
 
-    private final boolean ememy;
-    private int x;
-    private int y;
+    private boolean enemy;
     private int speed;
     private Direction direction;
-    //0:上 1:下 2:左 3:右
+    //0:上 1:下 2:左 3:右四個方向
     private boolean[] dirs = new boolean[4];
 
-    public Tank(int x, int y, Direction direction) {
-        this(x, y, direction, false);
+
+    public Tank(int x, int y,Direction direction,Image[] image){
+        this(x,y,direction,false,image);
     }
 
-    public Tank(int x, int y, Direction direction, boolean ememy) {
-        this.x = x;
-        this.y = y;
+    public Tank(int x, int y, Direction direction, boolean enemy,Image[] image) {
+        super(x,y,image);
         this.direction = direction;
         speed = 5;
-        this.ememy = ememy;
+        this.enemy = enemy;
     }
 
     public boolean[] getDirs() {
@@ -79,7 +79,8 @@ public class Tank {
     //坦克圖片
     public Image getImage() {
 
-        String name = ememy ? "etank" : "itank";
+        String name = enemy ? "etank" : "itank";
+        ;
 
 
         if (direction == Direction.UP) {
