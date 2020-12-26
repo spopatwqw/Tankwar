@@ -3,9 +3,8 @@ public enum Direction {
     DOWN,
     LEFT,
     RIGHT,
-    UP_LEFT,
-    UP_RIGHT,
-    DOWN_LEFT,
-    DOWN_RIGHT,
-
+    LEFT_UP,
+    RIGHT_UP,
+    LEFT_DOWN,
+    RIGHT_DOWN;
 }

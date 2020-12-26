@@ -3,22 +3,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class TankGame {
+
     public static void main(String[] args) {
-
+        GameClient gameClient=new GameClient();
         JFrame frame=new JFrame();
-        GameClient gameClient=new GameClient(800,600);
-        frame.setTitle("坦克大戰!");
-        frame.setResizable(false);
         frame.add(gameClient);
-        frame.pack();
-
-        //置中顯示
-        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        gameClient.repaint();
+        frame.pack();
 
         frame.addKeyListener(new KeyAdapter() {
             @Override
