@@ -13,7 +13,8 @@ public class GameClient extends JComponent {
 
     private int screenWidth;
     private int screenHeight;
-    private ArrayList<GameObject> object = new ArrayList<>();
+    private ArrayList<GameObject> gameObjects = new ArrayList<>();
+
 
 
     //玩家坦克
@@ -63,13 +64,14 @@ public class GameClient extends JComponent {
             eTankImage[i] = Tools.getImage("etank" + sub[i]);
         }
 
-
         playerTank = new Tank(500, 100, Direction.DOWN, iTankImage);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
                 enemyTanks.add(new Tank(350 + j * 100, 500 + 80 * i, Direction.UP, eTankImage));
             }
         }
+
+
         //牆面
         Wall[] walls = {
                 new Wall(250, 150, true, 15, brickImage),
@@ -78,6 +80,8 @@ public class GameClient extends JComponent {
         };
 
         this.walls.addAll(Arrays.asList(walls));
+
+
 
     }
 
@@ -91,6 +95,8 @@ public class GameClient extends JComponent {
         for (Wall wall : walls) {
             wall.draw(g);
         }
+
+
     }
 
     public void keyPressed(KeyEvent e) {
