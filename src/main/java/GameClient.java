@@ -1,6 +1,7 @@
 
 
 import jdk.internal.icu.text.UnicodeSet;
+import object.GameObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,8 @@ public class GameClient extends JComponent {
 
     private int screenWidth;
     private int screenHeight;
+    private ArrayList<GameObject> object = new ArrayList<>();
+
 
     //玩家坦克
     private Tank playerTank;
@@ -49,17 +52,29 @@ public class GameClient extends JComponent {
 
     public void init() {
 
-        playerTank = new Tank(500, 100, Direction.DOWN);
+        Image[] brickImage = {Tools.getImage("brick.png")};
+        Image[] iTankImage = new Image[8];
+        Image[] eTankImage = new Image[8];
+
+        String[] sub = {"U.png", "D.png", "L.png", "R.png", "LU.png", "RU.png", "LD.png", "RD.png"};
+
+        for (int i = 0; i < iTankImage.length; i++) {
+            iTankImage[i] = Tools.getImage("itank" + sub[i]);
+            eTankImage[i] = Tools.getImage("etank" + sub[i]);
+        }
+
+
+        playerTank = new Tank(500, 100, Direction.DOWN, iTankImage);
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
-                enemyTanks.add(new Tank(350 + j * 80, 500 + 80 * i, Direction.UP));
+                enemyTanks.add(new Tank(350 + j * 100, 500 + 80 * i, Direction.UP, eTankImage));
             }
         }
         //牆面
         Wall[] walls = {
-                new Wall(250, 150, true, 15),
-                new Wall(150, 200, false, 15),
-                new Wall(800, 200, false, 15),
+                new Wall(250, 150, true, 15, brickImage),
+                new Wall(150, 200, false, 15, brickImage),
+                new Wall(800, 200, false, 15, brickImage),
         };
 
         this.walls.addAll(Arrays.asList(walls));
@@ -73,7 +88,7 @@ public class GameClient extends JComponent {
             tank.draw(g);
         }
 
-        for(Wall wall:walls){
+        for (Wall wall : walls) {
             wall.draw(g);
         }
     }

@@ -13,16 +13,17 @@ public class Tank extends GameObject {
     private boolean[] dirs = new boolean[4];
 
 
-    public Tank(int x, int y,Direction direction,Image[] image){
-        this(x,y,direction,false,image);
+    public Tank(int x, int y, Direction direction, Image[] image) {
+        this(x, y, direction, false, image);
     }
 
-    public Tank(int x, int y, Direction direction, boolean enemy,Image[] image) {
-        super(x,y,image);
+    public Tank(int x, int y, Direction direction, boolean enemy, Image[] image) {
+        super(x, y, image);
         this.direction = direction;
         speed = 5;
         this.enemy = enemy;
     }
+
 
     public boolean[] getDirs() {
         return dirs;
@@ -158,7 +159,7 @@ public class Tank extends GameObject {
             move();
         }
 
-        g.drawImage(getImage(), x, y, null);
+        g.drawImage(image[direction.ordinal()],x,y,null);
 
     }
 
@@ -172,5 +173,17 @@ public class Tank extends GameObject {
         }
 
         return false;
+    }
+
+
+    //坦克停止
+    public boolean isStop() {
+        for (int i = 0; i < dirs.length; i++) {
+            if (dirs[i]) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
