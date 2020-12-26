@@ -1,15 +1,21 @@
 
 
+import jdk.internal.icu.text.UnicodeSet;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class GameClient extends JComponent {
 
     private int screenWidth;
     private int screenHeight;
 
+    //玩家坦克
     private Tank playerTank;
+    //敵方坦克
+    private ArrayList<Tank> ememyTanks = new ArrayList<>();
 
 
     GameClient() {
@@ -25,7 +31,7 @@ public class GameClient extends JComponent {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true){
+                while (true) {
                     //更新遊戲畫面
                     repaint();
                     try {
@@ -38,60 +44,66 @@ public class GameClient extends JComponent {
         }).start();
     }
 
-    public void init(){
-        playerTank=new Tank(400,300, Direction.DOWN);
+    public void init() {
+
+        playerTank = new Tank(500, 100, Direction.DOWN);
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 4; j++) {
+                ememyTanks.add(new Tank(350 + j * 80, 500 + 80 * i, Direction.UP));
+            }
+        }
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(0,0,screenWidth,screenHeight);
-
+    public void paintComponent(Graphics g) {
         playerTank.draw(g);
+        for (Tank tank : ememyTanks) {
+            tank.draw(g);
+        }
     }
 
-    public void keyPressed(KeyEvent e){
+    public void keyPressed(KeyEvent e) {
         //傳址
-        boolean[] dirs= playerTank.getDirs();
+        boolean[] dirs = playerTank.getDirs();
 
-        switch (e.getKeyCode()){
+        switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                dirs[0]=true;
+                dirs[0] = true;
 
                 break;
             case KeyEvent.VK_DOWN:
-                dirs[1]=true;
+                dirs[1] = true;
                 break;
 
             case KeyEvent.VK_LEFT:
-                dirs[2]=true;
+                dirs[2] = true;
                 break;
 
             case KeyEvent.VK_RIGHT:
-                dirs[3]=true;
+                dirs[3] = true;
                 break;
         }
     }
 
     public void keyReleased(KeyEvent e) {
         //傳址
-        boolean[] dirs= playerTank.getDirs();
+        boolean[] dirs = playerTank.getDirs();
 
-        switch (e.getKeyCode()){
+        switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                dirs[0]=false;
+                dirs[0] = false;
 
                 break;
             case KeyEvent.VK_DOWN:
-                dirs[1]=false;
+                dirs[1] = false;
                 break;
 
             case KeyEvent.VK_LEFT:
-                dirs[2]=false;
+                dirs[2] = false;
                 break;
 
             case KeyEvent.VK_RIGHT:
-                dirs[3]=false;
+                dirs[3] = false;
                 break;
         }
     }

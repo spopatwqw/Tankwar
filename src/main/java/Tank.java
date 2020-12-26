@@ -4,6 +4,7 @@ import java.awt.*;
 
 public class Tank {
 
+    private final boolean ememy;
     private int x;
     private int y;
     private int speed;
@@ -11,11 +12,16 @@ public class Tank {
     //0:上 1:下 2:左 3:右
     private boolean[] dirs = new boolean[4];
 
-    public Tank(int x, int y, Direction direction) {
+    public Tank(int x, int y, Direction direction){
+        this(x,y,direction,false);
+    }
+
+    public Tank(int x, int y, Direction direction,boolean ememy) {
         this.x = x;
-        this.y = y;
-        this.direction = direction;
+        this.y=y;
+        this.direction=direction;
         speed = 5;
+        this.ememy=ememy;
     }
 
     public boolean[] getDirs() {
@@ -70,6 +76,7 @@ public class Tank {
         return direction;
     }
 
+    //坦克圖片
     public Image getImage() {
         if (direction == Direction.UP) {
             return new ImageIcon("assets/images/itankU.png").getImage();
